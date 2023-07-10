@@ -22,10 +22,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/data-entry": [
+    "/dashboard": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/data-entry.js"
+      "static/chunks/pages/dashboard.js"
     ]
   },
   "ampFirstPages": []

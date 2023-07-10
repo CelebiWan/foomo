@@ -3,5 +3,5 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/ingredient-properties": "pages/api/ingredient-properties.js",
-  "/data-entry": "pages/data-entry.js"
+  "/dashboard": "pages/dashboard.js"
 }

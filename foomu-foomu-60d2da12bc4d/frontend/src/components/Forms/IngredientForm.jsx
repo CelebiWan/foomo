@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
+
 function IngredientForm() {
   const [message, setMessage] = useState('');  // Add this line to create a state variable for message
 
