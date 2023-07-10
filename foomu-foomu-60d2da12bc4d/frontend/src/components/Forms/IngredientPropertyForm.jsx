@@ -1,8 +1,38 @@
-import React, { useState } from 'react';
-import { Button, FormControl, FormLabel, Input, Checkbox } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import {     Button, 
+  FormControl, 
+  FormLabel, 
+  Input, 
+  Checkbox, 
+  Select, 
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure
+} from '@chakra-ui/react';
+import IngredientForm from './IngredientForm';
+import PropertyTypeForm from './PropertyTypeForm';
+
+
 
 function IngredientPropertyForm() {
   const [message, setMessage] = useState('');
+  const [ingredients, setIngredients] = useState([]);
+  const [propertyTypes, setPropertyTypes] = useState([]);
+
+  useEffect(() => {
+    // Fetch ingredients and property types when component mounts
+    fetch('/api/ingredient-properties')
+      .then(res => res.json())
+      .then(data => {
+        setIngredients(data.ingredients);
+        setPropertyTypes(data.propertyTypes);
+      });
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,18 +62,54 @@ function IngredientPropertyForm() {
     }
   };
 
+  const { isOpen: isIngredientModalOpen, onOpen: onIngredientModalOpen, onClose: onIngredientModalClose } = useDisclosure();
+  const { isOpen: isPropertyTypeModalOpen, onOpen: onPropertyTypeModalOpen, onClose: onPropertyTypeModalClose } = useDisclosure();
+
   return (
     <>
       <form onSubmit={handleSubmit}>
         <FormControl id="ingredient_id">
-          <FormLabel>Ingredient ID</FormLabel>
-          <Input type="number" name="ingredient_id" required />
+          <FormLabel>Ingredient</FormLabel>
+          <Select name="ingredient_id" required>
+            {ingredients.map((ingredient) => (
+              <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
+            ))}
+          </Select>
+          <Button onClick={onIngredientModalOpen}>+</Button>
         </FormControl>
+
+        <Modal isOpen={isIngredientModalOpen} onClose={onIngredientModalClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Add a new ingredient</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <IngredientForm />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
 
         <FormControl id="property_type">
           <FormLabel>Property Type</FormLabel>
-          <Input type="number" name="property_type" required />
+          <Select name="property_type" required>
+            {propertyTypes.map((propertyType) => (
+              <option key={propertyType.id} value={propertyType.id}>{propertyType.name}</option>
+            ))}
+          </Select>
+          <Button onClick={onPropertyTypeModalOpen}>+</Button>
         </FormControl>
+
+        <Modal isOpen={isPropertyTypeModalOpen} onClose={onPropertyTypeModalClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Add a new property type</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <PropertyTypeForm />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
 
         <FormControl id="value">
           <FormLabel>Value</FormLabel>
