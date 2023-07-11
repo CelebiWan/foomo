@@ -269,7 +269,7 @@ import {
       children: [
         {
           label: 'Input to Database',
-          href: '/data-entry',
+          href: '/dashboard',
         },
         {
           label: 'Search Database',

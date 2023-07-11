@@ -107,7 +107,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/api/property-types.js"  ],
+, "pages/api/property-types.js", "pages/dashboard.js", "pages/dashboard.jsx"  ],
   "exclude": [
     "node_modules"
   ]

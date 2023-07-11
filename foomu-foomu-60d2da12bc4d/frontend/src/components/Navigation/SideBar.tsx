@@ -94,6 +94,11 @@ const LinkItems: Array<LinkItemProps> = [
   }
   
   const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+    const fetchData = (name: ReactText) => {
+      // define what happens when a nav item is clicked here
+      // replace with your actual logic
+      console.log(`Fetch data for ${name}`);
+    };
     return (
       <Box
         transition="3s ease"
@@ -111,7 +116,7 @@ const LinkItems: Array<LinkItemProps> = [
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
         </Flex>
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon}>
+          <NavItem key={link.name} icon={link.icon} handleNavClick={fetchData}>
             {link.name}
           </NavItem>
         ))}
@@ -122,33 +127,33 @@ const LinkItems: Array<LinkItemProps> = [
   interface NavItemProps extends FlexProps {
     icon: IconType;
     children: ReactText;
+    handleNavClick: (name: ReactText) => void;
+    
   }
   const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+    const { handleNavClick } = rest;
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const [currentForm, setCurrentForm] = React.useState(''); // Create state
+    const [currentForm, setCurrentForm] = React.useState(''); 
   
-    // Set form on button click
     const handleOpen = () => {
-        if (typeof children === 'string') {
-      setCurrentForm(children);
-      onOpen();
-        }
+      if (typeof children === 'string') {
+        setCurrentForm(children);
+        onOpen();
+      }
     };
   
-    const renderForm = () => { // Function to return the right form based on the state
+    const renderForm = () => {
       switch (currentForm) {
         case 'Ingredient':
           return <IngredientForm />;
         case 'Property Type':
-          // Return your PropertyTypeForm
           return <PropertyTypeForm />;
         case 'Ingredient Properties':
-          // Return your IngredientPropertiesForm
           return <IngredientPropertiesForm />;
         default:
           return null;
       }
-    }
+    };
   
     return (
       <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
@@ -163,7 +168,8 @@ const LinkItems: Array<LinkItemProps> = [
             bg: 'cyan.400',
             color: 'white',
           }}
-          {...rest}>
+          onClick={() => handleNavClick(children)}  // Fetch data when the sidebar item is clicked
+        >
           {icon && (
             <Icon
               mr="4"
@@ -175,7 +181,7 @@ const LinkItems: Array<LinkItemProps> = [
             />
           )}
           {children}
-          <Button ml="auto" size="sm" onClick={handleOpen}>+</Button>
+          <Button ml="auto" size="sm" onClick={handleOpen}>+</Button>  
   
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
@@ -197,6 +203,7 @@ const LinkItems: Array<LinkItemProps> = [
       </Link>
     );
   };
+  
   
   
   interface MobileProps extends FlexProps {
