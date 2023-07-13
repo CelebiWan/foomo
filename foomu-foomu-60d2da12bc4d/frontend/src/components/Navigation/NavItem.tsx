@@ -26,17 +26,26 @@ import {
     Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter
   } from '@chakra-ui/react';
   import IngredientForm from '../Forms/IngredientForm';
-  import PropertyTypeForm from '../Forms/PropertyTypeForm';
-  import IngredientPropertiesForm from '../Forms/IngredientPropertyForm';
+  import PropertyTypeForm from '../Forms/PropertyTypesForm';
+  import IngredientPropertiesForm from '../Forms/IngredientPropertiesForm';
   
 
 interface NavItemProps {
   icon: IconType;
   children: string;
-  onClickBigButton: (entity: string) => void;
+  onClickIngredientTable: (entity: string) => void;
+  onClickPropertyTypeTable: (entity: string) => void;
+  onClickIngredientPropertiesTable: (entity: string) => void;
 }
 
-const NavItem: FC<NavItemProps> = ({ icon: Icon, children, onClickBigButton }) => {
+const NavItem: FC<NavItemProps> = ({ 
+  icon: Icon, 
+  children, 
+  onClickIngredientTable,
+  onClickPropertyTypeTable,
+  onClickIngredientPropertiesTable, }) => {
+  
+
   const [currentForm, setCurrentForm] = useState<string>('');
 
   const handleOpen = (event: React.MouseEvent) => {
@@ -45,10 +54,6 @@ const NavItem: FC<NavItemProps> = ({ icon: Icon, children, onClickBigButton }) =
   };
   
 
-//   const onClickBigButtonTable = () => {
-//   console.log('onClickBigButtonTable called:', children);
-//   onClickBigButton(children); // Pass children as the argument
-// };
 
 
   const renderForm = () => {
@@ -77,7 +82,13 @@ const NavItem: FC<NavItemProps> = ({ icon: Icon, children, onClickBigButton }) =
           bg: 'cyan.400',
           color: 'white',
         }}
-        onClick={() => onClickBigButton(children)}
+        onClick={() => {if (children === 'Ingredient') {
+          onClickIngredientTable(children);
+        } else if (children === 'Property Type') {
+          onClickPropertyTypeTable(children);
+        }else if (children === 'Ingredient Properties') {
+          onClickIngredientPropertiesTable(children);}
+      }}
         >
       
         {Icon && (
