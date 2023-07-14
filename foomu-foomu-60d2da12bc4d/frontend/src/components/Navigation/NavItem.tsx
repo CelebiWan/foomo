@@ -45,7 +45,16 @@ const NavItem: FC<NavItemProps> = ({
   onClickPropertyTypeTable,
   onClickIngredientPropertiesTable, }) => {
   
+  const handleClickIngredientTable = () => {
+    onClickIngredientTable(children);
+  };
 
+  const handleClickPropertyTypeTable = () => {
+    onClickPropertyTypeTable(children);
+  };
+  const handleNavClickIngredientPropertiesTable = () => {
+    onClickIngredientPropertiesTable(children);
+  };
   const [currentForm, setCurrentForm] = useState<string>('');
 
   const handleOpen = (event: React.MouseEvent) => {

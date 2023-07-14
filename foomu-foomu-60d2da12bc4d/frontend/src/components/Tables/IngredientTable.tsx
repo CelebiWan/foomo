@@ -10,13 +10,10 @@ interface Ingredient {
 
 interface TableProps {
   data: Ingredient[];
-  selectedTable: string | null;
+  handleIngredientClick: (ingredient: string) => void;
 }
 
-const IngredientTable: FC<TableProps> = ({ data, selectedTable }) => {
-  console.log('selectedTable:', selectedTable);
-  console.log('data:', data);
-
+const IngredientTable: FC<TableProps> = ({ data, handleIngredientClick }) => {
   if (!data) {
     return <p>Loading data...</p>;
   }
@@ -29,6 +26,7 @@ const IngredientTable: FC<TableProps> = ({ data, selectedTable }) => {
           <Th>Alias</Th>
           <Th>Name</Th>
           <Th>CAS Number</Th>
+          <Th>Actions</Th> {/* Added Actions column */}
         </Tr>
       </Thead>
       <Tbody>
@@ -38,6 +36,11 @@ const IngredientTable: FC<TableProps> = ({ data, selectedTable }) => {
             <Td>{ingredient.alias}</Td>
             <Td>{ingredient.name}</Td>
             <Td>{ingredient.cas_number}</Td>
+            <Td>
+              <Button size="sm" onClick={() => handleIngredientClick(ingredient.id.toString())}>
+                View Properties
+              </Button>
+            </Td>
           </Tr>
         ))}
       </Tbody>

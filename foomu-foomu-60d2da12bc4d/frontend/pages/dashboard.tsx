@@ -36,7 +36,7 @@ function DataEntryPage() {
           url = 'http://127.0.0.1:8000/api/property-types/';
           break;
         case 'Ingredient Properties':
-          url = 'http://127.0.0.1:8000/api/ingredient-properties';
+          url = 'http://127.0.0.1:8000/api/ingredient-properties/';
           break;
         default:
           url = '';

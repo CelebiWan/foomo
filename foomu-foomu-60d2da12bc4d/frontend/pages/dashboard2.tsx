@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Flex, Grid } from '@chakra-ui/react';
-import SidebarContent from '../src/components/Navigation/SideBar'; 
+import SidebarContent from '../src/components/Navigation/SideBar';
 import IngredientTable from '../src/components/Tables/IngredientTable';
 import IngredientPropertiesTable from '../src/components/Tables/IngredientPropertiesTable';
 
@@ -10,8 +10,19 @@ function DataEntryPage() {
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
   const [ingredientProperties, setIngredientProperties] = useState<any[]>([]);
 
-  const handleNavClickTable = (entity: string) => {
+  const handleNavClickIngredientTable = (entity: string) => {
     setCurrentEntity(entity);
+    setSelectedIngredient(null); // Reset selected ingredient when switching entities
+  };
+
+  const handleNavClickPropertyTypeTable = (entity: string) => {
+    setCurrentEntity(entity);
+    setSelectedIngredient(null); // Reset selected ingredient when switching entities
+  };
+
+  const handleNavClickIngredientPropertiesTable = (entity: string) => {
+    setCurrentEntity(entity);
+    setSelectedIngredient(null); // Reset selected ingredient when switching entities
   };
 
   const handleIngredientClick = (ingredient: string) => {
@@ -21,7 +32,9 @@ function DataEntryPage() {
 
   const fetchIngredientProperties = async (ingredient: string) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/ingredient-properties/${ingredient}`);
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/ingredient/${ingredient}/properties/`
+      );
       if (!response.ok) {
         console.error('Failed to fetch ingredient properties');
         setIngredientProperties([]);
@@ -45,12 +58,12 @@ function DataEntryPage() {
           url = 'http://127.0.0.1:8000/api/ingredients/';
           break;
         case 'Property Type':
-          url = 'http://127.0.0.1:8000/api/property-type/';
+          url = 'http://127.0.0.1:8000/api/property-types/';
           break;
         default:
           url = '';
       }
-    
+
       if (url) {
         try {
           const response = await fetch(url);
@@ -73,20 +86,29 @@ function DataEntryPage() {
   }, [currentEntity]);
 
   return (
-    <Grid templateColumns="1fr 1fr" gap={4}>
+    <Grid templateColumns="0.5fr 3fr" gap={4}>
       <Box>
-        <SidebarContent handleNavClickTable={handleNavClickTable} handleIngredientClick={handleIngredientClick} />
+        <SidebarContent
+          handleNavClickIngredientTable={handleNavClickIngredientTable}
+          handleNavClickPropertyTypeTable={handleNavClickPropertyTypeTable}
+          handleNavClickIngredientPropertiesTable={handleNavClickIngredientPropertiesTable}
+        />
       </Box>
-      <Box>
-        <Flex direction="column" height="100vh" overflow="auto">
+      <Flex direction="column" height="100vh" overflow="auto">
+        <Box p={5}>
+          {currentEntity === 'Ingredient' && (
+            <IngredientTable
+              data={currentData}
+              handleIngredientClick={handleIngredientClick}
+            />
+          )}
+        </Box>
+        {selectedIngredient && (
           <Box p={5}>
-            {currentEntity === 'Ingredient' && <IngredientTable data={currentData} handleIngredientClick={handleIngredientClick} />}
+            <IngredientPropertiesTable data={ingredientProperties} />
           </Box>
-          <Box p={5}>
-            {selectedIngredient && <IngredientPropertiesTable data={ingredientProperties} />}
-          </Box>
-        </Flex>
-      </Box>
+        )}
+      </Flex>
     </Grid>
   );
 }

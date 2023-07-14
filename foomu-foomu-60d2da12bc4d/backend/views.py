@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 from .serializers import (
     IngredientSerializer,
@@ -94,6 +94,7 @@ class PropertyTypeViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=204)
+        
     
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -125,6 +126,13 @@ class IngredientPropertyViewSet(viewsets.ModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+    
+class IngredientPropertyDetailViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = IngredientPropertySerializer
+
+    def get_queryset(self):
+        ingredient_id = int(self.kwargs['ingredient_id']) 
+        return IngredientProperty.objects.filter(ingredient_id=ingredient_id)
 
 
 

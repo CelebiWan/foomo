@@ -1,10 +1,16 @@
 import React, { FC } from 'react';
 import { Table as ChakraTable, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react';
 
+interface PropertyType {
+  id: number;
+  alias: string;
+  name: string;
+  // include other fields if you have any in the PropertyType model
+}
 interface IngredientProperties {
   id: number;
   ingredient_id: number;
-  property_type: string;
+  property_type: PropertyType;
   value: number | null;
   boolean: boolean | null;
   comment: string | null;
@@ -40,7 +46,7 @@ const IngredientPropertiesTable: FC<TableProps> = ({ data, selectedTable }) => {
           <Tr key={property.id}>
             <Td>{property.id}</Td>
             <Td>{property.ingredient_id}</Td>
-            <Td>{property.property_type}</Td>
+            <Td>{property.property_type.name}</Td>
             <Td>{property.value}</Td>
             <Td>{property.boolean}</Td>
             <Td>{property.comment}</Td>

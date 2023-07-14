@@ -31,6 +31,7 @@ class PropertyTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class IngredientPropertySerializer(serializers.ModelSerializer):
+    property_type = PropertyTypeSerializer(read_only=True)
     class Meta:
         model = IngredientProperty
         fields = '__all__'
