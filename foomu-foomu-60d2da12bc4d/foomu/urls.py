@@ -8,6 +8,7 @@ from backend.views import (
     IngredientPropertyDetailViewSet,
     InteractionTypeViewSet,
     InteractionViewSet,
+    InteractionDetailViewSet,
     FunctionalityViewSet,
     RecipeViewSet,
     RecipeMetadataViewSet,
@@ -51,4 +52,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/ingredient/<int:ingredient_id>/properties/', IngredientPropertyDetailViewSet.as_view({'get': 'list'}), name='ingredient-properties-detail'),
+    path('api/ingredient/<int:ingredient_id>/interactions/', InteractionDetailViewSet.as_view({'get': 'list'}), name='ingredient-interactions-detail'),
+
 ]

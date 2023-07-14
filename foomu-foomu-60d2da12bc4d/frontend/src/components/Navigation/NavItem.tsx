@@ -28,7 +28,12 @@ import {
   import IngredientForm from '../Forms/IngredientForm';
   import PropertyTypeForm from '../Forms/PropertyTypesForm';
   import IngredientPropertiesForm from '../Forms/IngredientPropertiesForm';
-  
+  import InteractionTypesForm from '../Forms/InteractionTypesForm';
+  import InteractionsForm from '../Forms/InteractionsForm';
+
+
+
+
 
 interface NavItemProps {
   icon: IconType;
@@ -36,6 +41,8 @@ interface NavItemProps {
   onClickIngredientTable: (entity: string) => void;
   onClickPropertyTypeTable: (entity: string) => void;
   onClickIngredientPropertiesTable: (entity: string) => void;
+  onClickInteractionTypesTable: (entity: string) => void;
+  onClickInteractionsTable: (entity: string) => void;
 }
 
 const NavItem: FC<NavItemProps> = ({ 
@@ -43,7 +50,10 @@ const NavItem: FC<NavItemProps> = ({
   children, 
   onClickIngredientTable,
   onClickPropertyTypeTable,
-  onClickIngredientPropertiesTable, }) => {
+  onClickIngredientPropertiesTable, 
+  onClickInteractionTypesTable,
+  onClickInteractionsTable,
+ }) => {
   
   const handleClickIngredientTable = () => {
     onClickIngredientTable(children);
@@ -54,6 +64,14 @@ const NavItem: FC<NavItemProps> = ({
   };
   const handleNavClickIngredientPropertiesTable = () => {
     onClickIngredientPropertiesTable(children);
+  };
+
+  const handleNavClickInteractionTypesTable = () => {
+    onClickInteractionTypesTable(children);
+  };
+
+  const handleNavClickInteractionsTableTable = () => {
+    onClickInteractionsTable(children);
   };
   const [currentForm, setCurrentForm] = useState<string>('');
 
@@ -73,6 +91,12 @@ const NavItem: FC<NavItemProps> = ({
         return <PropertyTypeForm />;
       case 'Ingredient Properties':
         return <IngredientPropertiesForm />;
+      case 'Interaction Types':
+        return <InteractionTypesForm />;
+      case 'Interactions':
+        return <InteractionsForm />;
+
+
       default:
         return null;
     }
@@ -96,7 +120,11 @@ const NavItem: FC<NavItemProps> = ({
         } else if (children === 'Property Type') {
           onClickPropertyTypeTable(children);
         }else if (children === 'Ingredient Properties') {
-          onClickIngredientPropertiesTable(children);}
+          onClickIngredientPropertiesTable(children);
+        }else if (children === 'Interaction Types') {
+          onClickInteractionTypesTable(children);
+        }else if (children === 'Interactions') {
+          onClickInteractionsTable(children);}
       }}
         >
       

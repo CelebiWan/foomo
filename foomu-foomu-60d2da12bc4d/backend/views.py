@@ -190,7 +190,12 @@ class InteractionViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
+class InteractionDetailViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = InteractionSerializer
 
+    def get_queryset(self):
+        ingredient_id = int(self.kwargs['ingredient_id']) 
+        return IngredientProperty.objects.filter(ingredient_id=ingredient_id)
 
 class FunctionalityViewSet(viewsets.ModelViewSet):
     queryset = Functionality.objects.all()

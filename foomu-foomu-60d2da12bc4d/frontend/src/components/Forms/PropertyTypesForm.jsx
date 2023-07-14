@@ -17,13 +17,15 @@ function PropertyTypeForm() {
       });
 
       if (response.ok) {
-        // Handle successful response or navigate to another page
+        setMessage('Form submitted successfully!');
+        event.target.reset();  // Resets the form after successful submission
       } else {
-        // Handle error response
         console.error('Error:', response.statusText);
+        setMessage('Error occurred while submitting form. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
+      setMessage('An unexpected error occurred. Please try again.');
     }
   };
 

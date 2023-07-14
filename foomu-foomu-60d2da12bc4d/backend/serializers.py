@@ -42,6 +42,7 @@ class InteractionTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class InteractionSerializer(serializers.ModelSerializer):
+    interaction_type = InteractionTypeSerializer(read_only=True)
     class Meta:
         model = Interaction
         fields = '__all__'

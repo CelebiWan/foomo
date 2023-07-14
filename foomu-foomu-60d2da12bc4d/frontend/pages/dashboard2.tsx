@@ -3,12 +3,14 @@ import { Box, Flex, Grid } from '@chakra-ui/react';
 import SidebarContent from '../src/components/Navigation/SideBar';
 import IngredientTable from '../src/components/Tables/IngredientTable';
 import IngredientPropertiesTable from '../src/components/Tables/IngredientPropertiesTable';
+import InteractionTable from '../src/components/Tables/InteractionTable';
 
 function DataEntryPage() {
   const [currentEntity, setCurrentEntity] = useState<string | null>(null);
   const [currentData, setCurrentData] = useState<any[]>([]);
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
   const [ingredientProperties, setIngredientProperties] = useState<any[]>([]);
+  const [interactions, setInteractions] = useState<any[]>([])
 
   const handleNavClickIngredientTable = (entity: string) => {
     setCurrentEntity(entity);
@@ -28,6 +30,7 @@ function DataEntryPage() {
   const handleIngredientClick = (ingredient: string) => {
     setSelectedIngredient(ingredient);
     fetchIngredientProperties(ingredient);
+    fetchInteractions(ingredient);
   };
 
   const fetchIngredientProperties = async (ingredient: string) => {
@@ -48,7 +51,24 @@ function DataEntryPage() {
       setIngredientProperties([]);
     }
   };
-
+const fetchInteractions = async (ingredient: string) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/ingredient/${ingredient}/interactions/`
+      );
+      if (!response.ok) {
+        console.error('Failed to fetch interactions');
+        setInteractions([]);
+      } else {
+        const data = await response.json();
+        console.log('interactions:', data);
+        setInteractions(data);
+      }
+    } catch (error) {
+      console.error('Error fetching interactions: ', error);
+      setInteractions([]);
+    }
+  };
   useEffect(() => {
     console.log('Fetching data...');
     const fetchData = async () => {

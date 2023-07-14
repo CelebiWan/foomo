@@ -11,9 +11,10 @@ interface Ingredient {
 interface TableProps {
   data: Ingredient[];
   handleIngredientClick: (ingredient: string) => void;
+  handleIngredientInteractions: (ingredient: string) => void; 
 }
 
-const IngredientTable: FC<TableProps> = ({ data, handleIngredientClick }) => {
+const IngredientTable: FC<TableProps> = ({ data, handleIngredientClick, handleIngredientInteractions }) => {
   if (!data) {
     return <p>Loading data...</p>;
   }
@@ -40,6 +41,9 @@ const IngredientTable: FC<TableProps> = ({ data, handleIngredientClick }) => {
               <Button size="sm" onClick={() => handleIngredientClick(ingredient.id.toString())}>
                 View Properties
               </Button>
+              <Button size="sm" onClick={() => handleIngredientInteractions(ingredient.name)}>
+                View Interactions
+                </Button>
             </Td>
           </Tr>
         ))}
