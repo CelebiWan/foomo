@@ -1,5 +1,6 @@
 // Sidebar.tsx
 import React, { FC, ReactNode, useState } from 'react';
+import { Box } from '@chakra-ui/react';
 import SidebarHeader from './SidebarHeader';
 import SidebarNavItems from './SidebarNavItems';
 import { LinkItems,LinkItemProps } from './LinkItems';
@@ -12,6 +13,8 @@ interface SidebarProps {children: ReactNode;
   handleNavClickIngredientPropertiesTable: (entity: string) => void;
   handleNavClickInteractionTypesTable: (entity: string) => void;
   handleNavClickInteractionsTable: (entity: string) => void;
+  
+  
 }
 
   const SidebarContent: FC<SidebarProps> = ({
@@ -23,6 +26,7 @@ interface SidebarProps {children: ReactNode;
     handleNavClickInteractionsTable,
   }) => {
     return (
+      
       <SidebarNavItems>
         <SidebarHeader />
         {LinkItems.map((link) => (
@@ -41,6 +45,7 @@ interface SidebarProps {children: ReactNode;
         ))}
         {children}
       </SidebarNavItems>
+      
     );
   };
   

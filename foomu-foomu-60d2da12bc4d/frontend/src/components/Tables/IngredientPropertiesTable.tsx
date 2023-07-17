@@ -7,9 +7,16 @@ interface PropertyType {
   name: string;
   // include other fields if you have any in the PropertyType model
 }
+
+interface Ingredient {
+  id: number;
+  alias: string;
+  name: string;
+  cas_number: string;
+}
 interface IngredientProperties {
   id: number;
-  ingredient_id: number;
+  ingredient_id: Ingredient;
   property_type: PropertyType;
   value: number | null;
   boolean: boolean | null;
@@ -34,7 +41,7 @@ const IngredientPropertiesTable: FC<TableProps> = ({ data, selectedTable }) => {
       <Thead>
         <Tr>
           <Th>ID</Th>
-          <Th>Ingredient ID</Th>
+          <Th>Ingredient Name</Th>
           <Th>Property Type</Th>
           <Th>Value</Th>
           <Th>Boolean</Th>
@@ -42,14 +49,14 @@ const IngredientPropertiesTable: FC<TableProps> = ({ data, selectedTable }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {data.map((property: IngredientProperties) => (
-          <Tr key={property.id}>
-            <Td>{property.id}</Td>
-            <Td>{property.ingredient_id}</Td>
-            <Td>{property.property_type.name}</Td>
-            <Td>{property.value}</Td>
-            <Td>{property.boolean}</Td>
-            <Td>{property.comment}</Td>
+        {data.map((ip: IngredientProperties) => (
+          <Tr key={ip.id}>
+            <Td>{ip.id}</Td>
+            <Td>{ip.ingredient_id.name}</Td>
+            <Td>{ip.property_type.name}</Td>
+            <Td>{ip.value}</Td>
+            <Td>{ip.boolean}</Td>
+            <Td>{ip.comment}</Td>
           </Tr>
         ))}
       </Tbody>

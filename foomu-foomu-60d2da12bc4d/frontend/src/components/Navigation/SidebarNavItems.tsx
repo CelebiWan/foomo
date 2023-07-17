@@ -15,7 +15,8 @@ const SidebarNavItems: React.FC<SidebarNavItemsProps> = ({ children }) => {
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
-      h="full"
+      maxH="90vh"
+      overflowY="auto"
     >
       {children}
     </Box>
@@ -23,3 +24,5 @@ const SidebarNavItems: React.FC<SidebarNavItemsProps> = ({ children }) => {
 };
 
 export default SidebarNavItems;
+
+

@@ -15,7 +15,8 @@ function InteractionForm() {
     fetch('/api/interactions')
       .then(res => res.json())
       .then(data => {
-        setIngredients(data.interactions);
+        console.log(data); 
+        setIngredients(data.ingredients);
         setInteractionTypes(data.interactionTypes);
         setIsLoading(false);
       })

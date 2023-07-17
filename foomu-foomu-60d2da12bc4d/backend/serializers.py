@@ -14,6 +14,7 @@ from .tables.formula_type import FormulaType
 from .tables.qualitative_type import QualitativeType
 from .tables.qualitative_result import QualitativeResult
 from .tables.quantitative_result import QuantitativeResult
+from .tables.equipment import Equipment
 from .tables.process import Process
 from .tables.validation import Validation
 from .tables.experiment import Experiment
@@ -31,6 +32,7 @@ class PropertyTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class IngredientPropertySerializer(serializers.ModelSerializer):
+    ingredient_id = IngredientSerializer(read_only=True)
     property_type = PropertyTypeSerializer(read_only=True)
     class Meta:
         model = IngredientProperty
@@ -42,6 +44,8 @@ class InteractionTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class InteractionSerializer(serializers.ModelSerializer):
+    ingredient1 = IngredientSerializer(read_only=True)
+    ingredient2 = IngredientSerializer(read_only=True)
     interaction_type = InteractionTypeSerializer(read_only=True)
     class Meta:
         model = Interaction
@@ -97,6 +101,10 @@ class QuantitativeResultSerializer(serializers.ModelSerializer):
         model = QuantitativeResult
         fields = '__all__'
 
+class EquipmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Equipment
+        fields = '__all__'
 class ProcessSerializer(serializers.ModelSerializer):
     class Meta:
         model = Process

@@ -11,6 +11,7 @@ class QuantitativeResult(models.Model):
     property_type = models.ForeignKey(
         PropertyType, to_field="alias", null=False, on_delete=models.CASCADE
     )
+    value = models.FloatField(blank=True, null=True)
     boolean = models.BooleanField(blank=True, null=True)
     comment = models.CharField(blank=True, null=True, max_length=200)
 

@@ -123,11 +123,7 @@ const fetchInteractions = async (ingredient: string) => {
             />
           )}
         </Box>
-        {selectedIngredient && (
-          <Box p={5}>
-            <IngredientPropertiesTable data={ingredientProperties} />
-          </Box>
-        )}
+        {currentEntity === 'Ingredient Properties' && <IngredientPropertiesTable data={currentData} />}
       </Flex>
     </Grid>
   );

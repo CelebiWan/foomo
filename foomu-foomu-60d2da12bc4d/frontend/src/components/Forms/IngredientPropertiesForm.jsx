@@ -29,6 +29,7 @@ function IngredientPropertyForm() {
     fetch('/api/ingredient-properties')
       .then(res => res.json())
       .then(data => {
+        console.log(data); 
         setIngredients(data.ingredients);
         setPropertyTypes(data.propertyTypes);
       });

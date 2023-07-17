@@ -19,6 +19,7 @@ from backend.views import (
     QualitativeTypeViewSet,
     QualitativeResultViewSet,
     QuantitativeResultViewSet,
+    EquipmentViewSet,
     ProcessViewSet,
     ValidationViewSet,
     ExperimentViewSet,
@@ -42,6 +43,7 @@ router.register('formula-types', FormulaTypeViewSet)
 router.register('qualitative-types', QualitativeTypeViewSet)
 router.register('qualitative-results', QualitativeResultViewSet)
 router.register('quantitative-results', QuantitativeResultViewSet)
+router.register('equipments', EquipmentViewSet)
 router.register('processes', ProcessViewSet)
 router.register('validations', ValidationViewSet)
 router.register('experiments', ExperimentViewSet)

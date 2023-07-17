@@ -22,20 +22,20 @@ export default async function handler(req, res) {
     // Send a response
     return res.status(201).json(responseData);
   } else if (req.method === 'GET') {
-    const [interactionResponse, interactionTypeResponse] = await Promise.all([
+    const [ingredientsResponse, interactionTypeResponse] = await Promise.all([
       fetch('http://127.0.0.1:8000/api/ingredients/'),
       fetch('http://127.0.0.1:8000/api/interaction-types/'),
     ]);
 
-    const [interactionData, interactionTypeData] = await Promise.all([
-      interactionResponse.json(),
+    const [ingredientsData, interactionTypeData] = await Promise.all([
+      ingredientsResponse.json(),
       interactionTypeResponse.json(),
     ]);
 
-    if (!interactionResponse.ok || !interactionTypeResponse.ok) {
+    if (!ingredientsResponse.ok || !interactionTypeResponse.ok) {
       // Handle error response
       return res
-        .status(interactionResponse.status || interactionTypeResponse.status)
+        .status(ingredientsResponse.status || interactionTypeResponse.status)
         .json({
           error: 'Failed to fetch data',
         });
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
 
     // Send a response
     return res.status(200).json({
-      interactions: interactionData,
+      ingredients: ingredientsData,
       interactionTypes: interactionTypeData,
     });
   } else {

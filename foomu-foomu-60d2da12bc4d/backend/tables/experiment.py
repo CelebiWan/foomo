@@ -6,6 +6,7 @@ from .formula_type import FormulaType
 
 class Experiment(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
+    name = models.CharField(max_length=100)
     recipe = models.OneToOneField(
         Recipe, to_field="alias", null=False, on_delete=models.RESTRICT
     )

@@ -3,6 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/dashboard": "pages/dashboard.js",
-  "/api/interactions": "pages/api/interactions.js",
-  "/dashboard2": "pages/dashboard2.js"
+  "/dashboard2": "pages/dashboard2.js",
+  "/api/experimentmethods": "pages/api/experimentmethods.js",
+  "/api/experimentvalidations": "pages/api/experimentvalidations.js"
 }

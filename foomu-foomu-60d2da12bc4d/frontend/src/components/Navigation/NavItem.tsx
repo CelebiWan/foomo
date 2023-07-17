@@ -30,8 +30,22 @@ import {
   import IngredientPropertiesForm from '../Forms/IngredientPropertiesForm';
   import InteractionTypesForm from '../Forms/InteractionTypesForm';
   import InteractionsForm from '../Forms/InteractionsForm';
-
-
+  import FunctionalitesForm from '../Forms/FunctionalitiesForm';
+  import RecipeForm from '../Forms/RecipeForm';
+  import RecipeMetadataForm from '../Forms/RecipemetadataForm';
+  import FormulaForm from '../Forms/FormulaForm';
+  import FormulaTypeForm from '../Forms/FormulaTypesForm';
+  import FormulaPropertiesForm from '../Forms/FormulaPropertiesForm';
+  import FormulaMetadataForm from '../Forms/FormulametadataForm';
+  import EquipmentForm from '../Forms/EquipmentsForm';
+  import ProcessesForm from '../Forms/ProcessesForm';
+  import ValidationsForm from '../Forms/ValidationsForm';
+  import ExperimentsForm from '../Forms/ExperimentsForm';
+  import ExperimentMethodForm from '../Forms/ExperimentMethodsForm';
+  import QualitativeTypeForm from '../Forms/QualitativeTypesForm';
+  import QuantitativeResultForm from '../Forms/QuantitativeResultsForm';
+  import QualitativeResultForm from '../Forms/QualitativeResultsForm';
+  import ExperimentValidationForm from '../Forms/ExperimentValidationsForm';
 
 
 
@@ -89,12 +103,46 @@ const NavItem: FC<NavItemProps> = ({
         return <IngredientForm />;
       case 'Property Type':
         return <PropertyTypeForm />;
-      case 'Ingredient Properties':
+      case 'Ingredient Property':
         return <IngredientPropertiesForm />;
-      case 'Interaction Types':
+      case 'Interaction Type':
         return <InteractionTypesForm />;
-      case 'Interactions':
+      case 'Interaction':
         return <InteractionsForm />;
+      case 'Functionality':
+        return <FunctionalitesForm />;
+      case 'Recipe':
+        return <RecipeForm />;
+      case 'Recipe Metadata':
+        return <RecipeMetadataForm />
+      case 'Formula':
+        return <FormulaForm />
+      case 'Formula Type':
+        return <FormulaTypeForm />
+      case 'Formula Properties':
+        return < FormulaPropertiesForm />
+      case 'Formula Metadata':
+        return < FormulaMetadataForm />
+      case 'Equipment':
+        return < EquipmentForm />
+      case 'Process':
+        return < ProcessesForm />
+      case 'Validation':
+        return < ValidationsForm />
+      case 'Experiment':
+        return < ExperimentsForm />
+      case 'Experiment Method':
+        return < ExperimentMethodForm />
+      case 'Qualitative Type':
+        return < QualitativeTypeForm />
+      case 'Quantitative Result':
+        return < QuantitativeResultForm />
+      case 'Qualitative Result':
+        return < QualitativeResultForm />
+      case 'Experiment Validation':
+        return < ExperimentValidationForm />  
+      
+  
 
 
       default:
@@ -129,7 +177,7 @@ const NavItem: FC<NavItemProps> = ({
         >
       
         {Icon && (
-          <Box mr="4" fontSize="16" _groupHover={{ color: 'white' }}>
+          <Box mr="4" fontSize="14" _groupHover={{ color: 'white' }}>
             <Icon />
           </Box>
         )}
