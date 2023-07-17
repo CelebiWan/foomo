@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Flex, Grid } from '@chakra-ui/react';
-import SidebarContent from '../src/components/Navigation/SideBar';
-import IngredientTable from '../src/components/Tables/IngredientTable';
-import IngredientPropertiesTable from '../src/components/Tables/IngredientPropertiesTable';
-import InteractionTable from '../src/components/Tables/InteractionTable';
+import DBDashboard from '../src/components/Dashboard/DBDashboard';
 
 function DataEntryPage() {
   const [currentEntity, setCurrentEntity] = useState<string | null>(null);
   const [currentData, setCurrentData] = useState<any[]>([]);
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
   const [ingredientProperties, setIngredientProperties] = useState<any[]>([]);
-  const [interactions, setInteractions] = useState<any[]>([])
+  const [interactions, setInteractions] = useState<any[]>([]);
+  const [showPropertiesTable, setShowPropertiesTable] = useState<boolean>(false);
+  const [showInteractionsTable, setShowInteractionsTable] = useState<boolean>(false);
 
   const handleNavClickIngredientTable = (entity: string) => {
     setCurrentEntity(entity);
@@ -27,12 +25,35 @@ function DataEntryPage() {
     setSelectedIngredient(null); // Reset selected ingredient when switching entities
   };
 
-  const handleIngredientClick = (ingredient: string) => {
+  // For Properties Table
+const showProperties = () => {
+  setShowPropertiesTable(true);
+};
+
+const hideProperties = () => {
+  setShowPropertiesTable(false);
+};
+
+// For Interactions Table
+const showInteractions = () => {
+  setShowInteractionsTable(true);
+};
+
+const hideInteractions = () => {
+  setShowInteractionsTable(false);
+};
+
+  const handleIngredientPropertiesClick = (ingredient: string) => {
     setSelectedIngredient(ingredient);
     fetchIngredientProperties(ingredient);
-    fetchInteractions(ingredient);
-  };
+    showProperties();
+};
 
+const handleIngredientInteractionsClick = (ingredient: string) => {
+    setSelectedIngredient(ingredient);
+    fetchInteractions(ingredient);
+    showInteractions(); 
+};
   const fetchIngredientProperties = async (ingredient: string) => {
     try {
       const response = await fetch(
@@ -106,26 +127,19 @@ const fetchInteractions = async (ingredient: string) => {
   }, [currentEntity]);
 
   return (
-    <Grid templateColumns="0.5fr 3fr" gap={4}>
-      <Box>
-        <SidebarContent
-          handleNavClickIngredientTable={handleNavClickIngredientTable}
-          handleNavClickPropertyTypeTable={handleNavClickPropertyTypeTable}
-          handleNavClickIngredientPropertiesTable={handleNavClickIngredientPropertiesTable}
-        />
-      </Box>
-      <Flex direction="column" height="100vh" overflow="auto">
-        <Box p={5}>
-          {currentEntity === 'Ingredient' && (
-            <IngredientTable
-              data={currentData}
-              handleIngredientClick={handleIngredientClick}
-            />
-          )}
-        </Box>
-        {currentEntity === 'Ingredient Properties' && <IngredientPropertiesTable data={currentData} />}
-      </Flex>
-    </Grid>
+    <DBDashboard
+      currentEntity={currentEntity}
+      currentData={currentData}
+      handleIngredientPropertiesClick={handleIngredientPropertiesClick}
+      handleIngredientInteractionsClick={handleIngredientInteractionsClick}
+      ingredientProperties={ingredientProperties}
+      interactions={interactions}
+      showPropertiesTable={showPropertiesTable}
+      showInteractionsTable={showInteractionsTable}
+      handleNavClickIngredientTable={handleNavClickIngredientTable}
+      handleNavClickPropertyTypeTable={handleNavClickPropertyTypeTable}
+      handleNavClickIngredientPropertiesTable={handleNavClickIngredientPropertiesTable}
+    />
   );
 }
 

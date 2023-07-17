@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 function PropertyTypeForm() {
+  const [message, setMessage] = useState('');
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -30,6 +31,7 @@ function PropertyTypeForm() {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <FormControl id="name">
         <FormLabel>Name</FormLabel>
@@ -45,6 +47,8 @@ function PropertyTypeForm() {
         Submit
       </Button>
     </form>
+    {message && <div>{message}</div>}
+    </>
   );
 }
 

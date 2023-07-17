@@ -54,6 +54,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/ingredient/<int:ingredient_id>/properties/', IngredientPropertyDetailViewSet.as_view({'get': 'list'}), name='ingredient-properties-detail'),
-    path('api/ingredient/<int:ingredient_id>/interactions/', InteractionDetailViewSet.as_view({'get': 'list'}), name='ingredient-interactions-detail'),
-
+    path('api/ingredient/<str:ingredient_name>/interactions/', InteractionDetailViewSet.as_view({'get': 'list'}), name='ingredient-interactions-detail'),
 ]

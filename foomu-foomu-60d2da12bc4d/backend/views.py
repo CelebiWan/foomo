@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 
 # Create your views here.
 from rest_framework import viewsets, status, generics
@@ -196,9 +197,11 @@ class InteractionDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = InteractionSerializer
 
     def get_queryset(self):
-        ingredient_id = int(self.kwargs['ingredient_id']) 
-        return IngredientProperty.objects.filter(ingredient_id=ingredient_id)
-
+        ingredient_name = self.kwargs['ingredient_name']
+        return Interaction.objects.filter(
+            Q(ingredient1__name__iexact=ingredient_name) | 
+            Q(ingredient2__name__iexact=ingredient_name)
+        )
 class FunctionalityViewSet(viewsets.ModelViewSet):
     queryset = Functionality.objects.all()
     serializer_class = FunctionalitySerializer

@@ -37,6 +37,7 @@ const IngredientPropertiesTable: FC<TableProps> = ({ data, selectedTable }) => {
   }
 
   return (
+    
     <ChakraTable variant="striped">
       <Thead>
         <Tr>

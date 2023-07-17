@@ -10,11 +10,11 @@ interface Ingredient {
 
 interface TableProps {
   data: Ingredient[];
-  handleIngredientClick: (ingredient: string) => void;
-  handleIngredientInteractions: (ingredient: string) => void; 
+  handleIngredientPropertiesClick: (ingredient: string) => void;
+  handleIngredientInteractionsClick: (ingredient: string) => void; 
 }
 
-const IngredientTable: FC<TableProps> = ({ data, handleIngredientClick, handleIngredientInteractions }) => {
+const IngredientTable: FC<TableProps> = ({ data, handleIngredientPropertiesClick, handleIngredientInteractionsClick }) => {
   if (!data) {
     return <p>Loading data...</p>;
   }
@@ -38,10 +38,10 @@ const IngredientTable: FC<TableProps> = ({ data, handleIngredientClick, handleIn
             <Td>{ingredient.name}</Td>
             <Td>{ingredient.cas_number}</Td>
             <Td>
-              <Button size="sm" onClick={() => handleIngredientClick(ingredient.id.toString())}>
+              <Button size="sm" onClick={() => handleIngredientPropertiesClick(ingredient.id.toString())}>
                 View Properties
               </Button>
-              <Button size="sm" onClick={() => handleIngredientInteractions(ingredient.name)}>
+              <Button size="sm" onClick={() => handleIngredientInteractionsClick(ingredient.name)}>
                 View Interactions
                 </Button>
             </Td>
