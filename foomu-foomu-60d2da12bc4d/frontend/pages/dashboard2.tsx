@@ -10,19 +10,31 @@ function DataEntryPage() {
   const [showPropertiesTable, setShowPropertiesTable] = useState<boolean>(false);
   const [showInteractionsTable, setShowInteractionsTable] = useState<boolean>(false);
 
-  const handleNavClickIngredientTable = (entity: string) => {
-    setCurrentEntity(entity);
-    setSelectedIngredient(null); // Reset selected ingredient when switching entities
-  };
 
-  const handleNavClickPropertyTypeTable = (entity: string) => {
-    setCurrentEntity(entity);
-    setSelectedIngredient(null); // Reset selected ingredient when switching entities
-  };
 
-  const handleNavClickIngredientPropertiesTable = (entity: string) => {
-    setCurrentEntity(entity);
-    setSelectedIngredient(null); // Reset selected ingredient when switching entities
+
+
+  const handleNavClick = (entity: string) => {
+    switch (entity) {
+      case 'Ingredient':
+        setCurrentEntity(entity);
+        setSelectedIngredient(null); // Reset selected ingredient when switching entities
+        break;
+      case 'Property Type':
+        setCurrentEntity(entity);
+        break;
+      case 'Ingredient Property':
+        setCurrentEntity(entity);
+        break;
+      case 'Interaction':
+        setCurrentEntity(entity);
+        break;
+      case 'Recipe':
+        setCurrentEntity(entity);
+        break;
+      default:
+        console.log('Unhandled entity: ', entity);
+    }
   };
 
   // For Properties Table
@@ -101,6 +113,15 @@ const fetchInteractions = async (ingredient: string) => {
         case 'Property Type':
           url = 'http://127.0.0.1:8000/api/property-types/';
           break;
+        case 'Ingredient Property':
+          url = 'http://127.0.0.1:8000/api/ingredient-properties/';
+          break;
+        case 'Interaction':
+          url = 'http://127.0.0.1:8000/api/interactions/';
+          break;
+        case 'Interaction':
+          url = 'http://127.0.0.1:8000/api/recipes/';
+          break;
         default:
           url = '';
       }
@@ -136,9 +157,7 @@ const fetchInteractions = async (ingredient: string) => {
       interactions={interactions}
       showPropertiesTable={showPropertiesTable}
       showInteractionsTable={showInteractionsTable}
-      handleNavClickIngredientTable={handleNavClickIngredientTable}
-      handleNavClickPropertyTypeTable={handleNavClickPropertyTypeTable}
-      handleNavClickIngredientPropertiesTable={handleNavClickIngredientPropertiesTable}
+      handleNavClick={handleNavClick}
     />
   );
 }

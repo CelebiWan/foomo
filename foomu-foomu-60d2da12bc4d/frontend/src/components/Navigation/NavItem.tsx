@@ -49,44 +49,22 @@ import {
 
 
 
-interface NavItemProps {
-  icon: IconType;
-  children: string;
-  onClickIngredientTable: (entity: string) => void;
-  onClickPropertyTypeTable: (entity: string) => void;
-  onClickIngredientPropertiesTable: (entity: string) => void;
-  onClickInteractionTypesTable: (entity: string) => void;
-  onClickInteractionsTable: (entity: string) => void;
-}
-
-const NavItem: FC<NavItemProps> = ({ 
-  icon: Icon, 
-  children, 
-  onClickIngredientTable,
-  onClickPropertyTypeTable,
-  onClickIngredientPropertiesTable, 
-  onClickInteractionTypesTable,
-  onClickInteractionsTable,
- }) => {
+  interface NavItemProps {
+    icon: IconType;
+    children: string;
+    onClick: (entity: string) => void;
+  }
   
-  const handleClickIngredientTable = () => {
-    onClickIngredientTable(children);
-  };
-
-  const handleClickPropertyTypeTable = () => {
-    onClickPropertyTypeTable(children);
-  };
-  const handleNavClickIngredientPropertiesTable = () => {
-    onClickIngredientPropertiesTable(children);
-  };
-
-  const handleNavClickInteractionTypesTable = () => {
-    onClickInteractionTypesTable(children);
-  };
-
-  const handleNavClickInteractionsTableTable = () => {
-    onClickInteractionsTable(children);
-  };
+  const NavItem: FC<NavItemProps> = ({ 
+    icon: Icon, 
+    children, 
+    onClick,
+   }) => {
+  
+    const handleClick = () => {
+      onClick(children);
+    };
+  
   const [currentForm, setCurrentForm] = useState<string>('');
 
   const handleOpen = (event: React.MouseEvent) => {
@@ -163,17 +141,7 @@ const NavItem: FC<NavItemProps> = ({
           bg: 'cyan.400',
           color: 'white',
         }}
-        onClick={() => {if (children === 'Ingredient') {
-          onClickIngredientTable(children);
-        } else if (children === 'Property Type') {
-          onClickPropertyTypeTable(children);
-        }else if (children === 'Ingredient Properties') {
-          onClickIngredientPropertiesTable(children);
-        }else if (children === 'Interaction Types') {
-          onClickInteractionTypesTable(children);
-        }else if (children === 'Interactions') {
-          onClickInteractionsTable(children);}
-      }}
+        onClick={handleClick}
         >
       
         {Icon && (

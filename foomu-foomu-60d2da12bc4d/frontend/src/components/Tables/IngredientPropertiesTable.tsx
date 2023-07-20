@@ -16,8 +16,8 @@ interface Ingredient {
 }
 interface IngredientProperties {
   id: number;
-  ingredient_id: Ingredient;
-  property_type: PropertyType;
+  ingredient_id: number;
+  property_type: number;
   value: number | null;
   boolean: boolean | null;
   comment: string | null;
@@ -53,8 +53,8 @@ const IngredientPropertiesTable: FC<TableProps> = ({ data, selectedTable }) => {
         {data.map((ip: IngredientProperties) => (
           <Tr key={ip.id}>
             <Td>{ip.id}</Td>
-            <Td>{ip.ingredient_id.name}</Td>
-            <Td>{ip.property_type.name}</Td>
+            <Td>{ip.ingredient_id}</Td>
+            <Td>{ip.property_type}</Td>
             <Td>{ip.value}</Td>
             <Td>{ip.boolean}</Td>
             <Td>{ip.comment}</Td>

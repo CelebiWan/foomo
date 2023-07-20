@@ -8,22 +8,14 @@ import NavItem from './NavItem';
 
 
 interface SidebarProps {children: ReactNode; 
-  handleNavClickIngredientTable: (entity: string) => void;
-  handleNavClickPropertyTypeTable: (entity: string) => void;
-  handleNavClickIngredientPropertiesTable: (entity: string) => void;
-  handleNavClickInteractionTypesTable: (entity: string) => void;
-  handleNavClickInteractionsTable: (entity: string) => void;
+  handleNavClick: (entity: string) => void;
   
   
 }
 
   const SidebarContent: FC<SidebarProps> = ({
     children,
-    handleNavClickIngredientTable,
-    handleNavClickPropertyTypeTable,
-    handleNavClickIngredientPropertiesTable,
-    handleNavClickInteractionTypesTable,
-    handleNavClickInteractionsTable,
+    handleNavClick,
   }) => {
     return (
       
@@ -33,11 +25,7 @@ interface SidebarProps {children: ReactNode;
           <NavItem
             key={link.name}
             icon={link.icon}
-            onClickIngredientTable={handleNavClickIngredientTable}
-            onClickPropertyTypeTable={handleNavClickPropertyTypeTable}
-            onClickIngredientPropertiesTable={handleNavClickIngredientPropertiesTable}
-            onClickInteractionTypesTable={handleNavClickInteractionTypesTable}
-            onClickInteractionsTable={handleNavClickInteractionsTable}
+            onClick={handleNavClick}
           
           >
             {link.name}

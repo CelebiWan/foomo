@@ -17,11 +17,11 @@ interface Ingredient {
 
 interface Interaction {
   id: number;
-  ingredient1: Ingredient;
-  ingredient2: Ingredient;
-  interaction_type: InteractionType;
+  ingredient1: string;
+  ingredient2: string;
+  interaction_type: string;
   value: number | null;
-  boolean: boolean | null;
+  boolean: boolean | null;s
   comment: string | null;
 }
 
@@ -55,9 +55,9 @@ const InteractionTable: FC<TableProps> = ({ data, selectedTable }) => {
         {data.map((interaction: Interaction) => (
           <Tr key={interaction.id}>
             <Td>{interaction.id}</Td>
-            <Td>{interaction.ingredient1.name}</Td>
-            <Td>{interaction.ingredient2.name}</Td>
-            <Td>{interaction.interaction_type.name}</Td>
+            <Td>{interaction.ingredient1}</Td>
+            <Td>{interaction.ingredient2}</Td>
+            <Td>{interaction.interaction_type}</Td>
             <Td>{interaction.value}</Td>
             <Td>{interaction.boolean}</Td>
             <Td>{interaction.comment}</Td>
