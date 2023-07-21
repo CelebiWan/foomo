@@ -134,9 +134,8 @@ class IngredientPropertyDetailViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = IngredientPropertySerializer
 
     def get_queryset(self):
-        ingredient_id = int(self.kwargs['ingredient_id']) 
-        return IngredientProperty.objects.filter(ingredient_id=ingredient_id)
-
+        ingredient_name = self.kwargs['ingredient_name']
+        return IngredientProperty.objects.filter(ingredient_id__name=ingredient_name)
 
 
 class InteractionTypeViewSet(viewsets.ModelViewSet):

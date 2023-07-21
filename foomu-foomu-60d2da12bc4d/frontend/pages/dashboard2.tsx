@@ -32,6 +32,9 @@ function DataEntryPage() {
       case 'Recipe':
         setCurrentEntity(entity);
         break;
+      case 'Recipe Metadata':
+        setCurrentEntity(entity);
+        break;
       default:
         console.log('Unhandled entity: ', entity);
     }
@@ -55,7 +58,7 @@ const hideInteractions = () => {
   setShowInteractionsTable(false);
 };
 
-  const handleIngredientPropertiesClick = (ingredient: string) => {
+const handleIngredientPropertiesClick = (ingredient: string) => {
     setSelectedIngredient(ingredient);
     fetchIngredientProperties(ingredient);
     showProperties();
@@ -119,8 +122,11 @@ const fetchInteractions = async (ingredient: string) => {
         case 'Interaction':
           url = 'http://127.0.0.1:8000/api/interactions/';
           break;
-        case 'Interaction':
+        case 'Recipe':
           url = 'http://127.0.0.1:8000/api/recipes/';
+          break;
+        case 'Recipe Metadata':
+          url = 'http://127.0.0.1:8000/api/recipe-metadata/';
           break;
         default:
           url = '';

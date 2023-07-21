@@ -1,23 +1,10 @@
 import React, { FC } from 'react';
 import { Table as ChakraTable, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react';
 
-interface PropertyType {
-  id: number;
-  alias: string;
-  name: string;
-  // include other fields if you have any in the PropertyType model
-}
-
-interface Ingredient {
-  id: number;
-  alias: string;
-  name: string;
-  cas_number: string;
-}
 interface IngredientProperties {
   id: number;
-  ingredient_id: number;
-  property_type: number;
+  ingredient_id: string;
+  property_type: string;
   value: number | null;
   boolean: boolean | null;
   comment: string | null;

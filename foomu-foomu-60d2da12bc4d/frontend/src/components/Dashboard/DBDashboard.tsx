@@ -7,6 +7,7 @@ import PropertyTypeTable from '../Tables/PropertyTypesTable';
 import IngredientPropertiesTable from '../Tables/IngredientPropertiesTable';
 import InteractionTable from '../Tables/InteractionTable';
 import RecipeTable from '../Tables/RecipeTable';
+import RecipeMetadataTable from '../Tables/RecipeMetadataTable';
 
 interface DBDashboardProps {
   currentEntity: string | null;
@@ -31,7 +32,7 @@ const DBDashboard: React.FC<DBDashboardProps> = ({
   showInteractionsTable,
   handleNavClick
 }) => {
-    console.log('interactions:', interactions);
+    
   return (
     <Grid templateColumns="0.5fr 3fr" gap={4}>
       <Box>
@@ -63,6 +64,7 @@ const DBDashboard: React.FC<DBDashboardProps> = ({
         {currentEntity === 'Ingredient Property' && <IngredientPropertiesTable data={currentData} />}
         {currentEntity === 'Interaction' && <InteractionTable data={currentData} />}
         {currentEntity === 'Recipe' && <RecipeTable data={currentData} />}
+        {currentEntity === 'Recipe Metadata' && <RecipeMetadataTable data={currentData} />}
       </Flex>
     </Grid>
   );

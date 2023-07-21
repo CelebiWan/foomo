@@ -6,12 +6,12 @@ from .interaction_type import InteractionType
 
 class Interaction(models.Model):
     ingredient1 = models.ForeignKey(
-        Ingredient, on_delete=models.RESTRICT, related_name="dependent_material1"
+        Ingredient, to_field="alias", on_delete=models.RESTRICT, related_name="dependent_material1"
     )
     ingredient2 = models.ForeignKey(
-        Ingredient, on_delete=models.RESTRICT, related_name="dependent_material2"
+        Ingredient, to_field="alias", on_delete=models.RESTRICT, related_name="dependent_material2"
     )
-    interaction_type = models.ForeignKey(InteractionType, on_delete=models.RESTRICT)
+    interaction_type = models.ForeignKey(InteractionType, to_field="alias", on_delete=models.RESTRICT)
     value = models.FloatField(blank=True, null=True)
     boolean = models.BooleanField(blank=True, null=True)
     comment = models.CharField(blank=True, null=True, max_length=200)

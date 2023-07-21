@@ -9,7 +9,7 @@ from .functionality import Functionality
 class RecipeMetadata(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     recipe = models.ForeignKey(Recipe, to_field="alias", on_delete=models.CASCADE)
-    funtionality = models.ForeignKey(
+    functionality = models.ForeignKey(
         Functionality,
         to_field="alias",
         on_delete=models.RESTRICT,

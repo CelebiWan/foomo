@@ -32,8 +32,6 @@ class PropertyTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class IngredientPropertySerializer(serializers.ModelSerializer):
-    ingredient_id = serializers.PrimaryKeyRelatedField(queryset=Ingredient.objects.all())
-    property_type = serializers.PrimaryKeyRelatedField(queryset=PropertyType.objects.all())
     class Meta:
         model = IngredientProperty
         fields = '__all__'
@@ -44,9 +42,7 @@ class InteractionTypeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class InteractionSerializer(serializers.ModelSerializer):
-    # ingredient1 = IngredientSerializer(read_only=True)
-    # ingredient2 = IngredientSerializer(read_only=True)
-    # interaction_type = InteractionTypeSerializer(read_only=True)
+
     class Meta:
         model = Interaction
         fields = '__all__'

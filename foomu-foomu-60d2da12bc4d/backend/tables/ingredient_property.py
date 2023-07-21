@@ -6,8 +6,8 @@ from .property_type import PropertyType
 
 class IngredientProperty(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
-    ingredient_id = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
-    property_type = models.ForeignKey(PropertyType, on_delete=models.RESTRICT)
+    ingredient_id = models.ForeignKey(Ingredient,  to_field="alias", on_delete=models.CASCADE)
+    property_type = models.ForeignKey(PropertyType,  to_field="alias", on_delete=models.RESTRICT)
     value = models.FloatField(blank=True, null=True)
     boolean = models.BooleanField(blank=True, null=True)
     comment = models.CharField(blank=True, null=True, max_length=200)

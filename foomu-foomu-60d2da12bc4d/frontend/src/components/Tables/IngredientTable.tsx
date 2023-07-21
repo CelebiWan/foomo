@@ -38,7 +38,7 @@ const IngredientTable: FC<TableProps> = ({ data, handleIngredientPropertiesClick
             <Td>{ingredient.name}</Td>
             <Td>{ingredient.cas_number}</Td>
             <Td>
-              <Button size="sm" onClick={() => handleIngredientPropertiesClick(ingredient.id.toString())}>
+              <Button size="sm" onClick={() => handleIngredientPropertiesClick(ingredient.name)}>
                 View Properties
               </Button>
               <Button size="sm" onClick={() => handleIngredientInteractionsClick(ingredient.name)}>

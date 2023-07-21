@@ -68,7 +68,7 @@ function InteractionForm() {
             <FormLabel>Ingredient 1</FormLabel>
             <Select name="ingredient1" required>
               {ingredients.map((ingredient) => (
-                <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
+                <option key={ingredient.id} value={ingredient.alias}>{ingredient.name}</option>
               ))}
             </Select>
             <Button onClick={onIngredientModalOpen}>+</Button>
@@ -89,7 +89,7 @@ function InteractionForm() {
             <FormLabel>Ingredient 2</FormLabel>
             <Select name="ingredient2" required>
               {ingredients.map((ingredient) => (
-                <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
+                <option key={ingredient.id} value={ingredient.alias}>{ingredient.name}</option>
               ))}
             </Select>
             <Button onClick={onIngredientModalOpen}>+</Button>
@@ -109,7 +109,7 @@ function InteractionForm() {
             <FormLabel>Interaction Type</FormLabel>
             <Select name="interaction_type" required>
               {interactionTypes.map((interactionType) => (
-                <option key={interactionType.id} value={interactionType.id}>{interactionType.name}</option>
+                <option key={interactionType.id} value={interactionType.alias}>{interactionType.name}</option>
               ))}
             </Select>
             <Button onClick={onInteractionTypeModalOpen}>+</Button>

@@ -21,7 +21,7 @@ interface Interaction {
   ingredient2: string;
   interaction_type: string;
   value: number | null;
-  boolean: boolean | null;s
+  boolean: boolean | null;
   comment: string | null;
 }
 

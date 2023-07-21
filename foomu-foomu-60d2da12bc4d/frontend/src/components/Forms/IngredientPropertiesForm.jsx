@@ -73,7 +73,7 @@ function IngredientPropertyForm() {
           <FormLabel>Ingredient</FormLabel>
           <Select name="ingredient_id" required>
             {ingredients.map((ingredient) => (
-              <option key={ingredient.id} value={ingredient.id}>{ingredient.name}</option>
+              <option key={ingredient.id} value={ingredient.alias}>{ingredient.name}</option>
             ))}
           </Select>
           <Button onClick={onIngredientModalOpen}>+</Button>
@@ -94,7 +94,7 @@ function IngredientPropertyForm() {
           <FormLabel>Property Type</FormLabel>
           <Select name="property_type" required>
             {propertyTypes.map((propertyType) => (
-              <option key={propertyType.id} value={propertyType.id}>{propertyType.name}</option>
+              <option key={propertyType.id} value={propertyType.alias}>{propertyType.name}</option>
             ))}
           </Select>
           <Button onClick={onPropertyTypeModalOpen}>+</Button>
