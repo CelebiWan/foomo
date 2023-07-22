@@ -1,27 +1,114 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Flex } from '@chakra-ui/react';
-import SidebarContent from '../src/components/Navigation/SideBar'; 
-import IngredientTable from '../src/components/Tables/IngredientTable';
-import PropertyTypeTable from '../src/components/Tables/PropertyTypesTable';
-import IngredientPropertiesTable from '../src/components/Tables/IngredientPropertiesTable';
-
+import DBDashboard from '../src/components/Dashboard/DBDashboard';
 
 function DataEntryPage() {
   const [currentEntity, setCurrentEntity] = useState<string | null>(null);
   const [currentData, setCurrentData] = useState<any[]>([]);
-  const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
+  const [selectedTable, setSelectedTable] = useState<'IngredientProperties' | 'Interactions' | 'RecipeMetadata' | null>(null);
   const [ingredientProperties, setIngredientProperties] = useState<any[]>([]);
+  const [interactions, setInteractions] = useState<any[]>([]);
+  const [recipeMetadata, setRecipeMetadata] = useState<any[]>([]);
 
-  const handleNavClickIngredientTable = (entity: string) => {
-    setCurrentEntity(entity);
+
+  const handleNavClick = (entity: string) => {
+    switch (entity) {
+      case 'Ingredient':
+        setCurrentEntity(entity);
+        setSelectedTable(null); // Reset selected ingredient when switching entities
+        break;
+      case 'Property Type':
+        setCurrentEntity(entity);
+        break;
+      case 'Ingredient Property':
+        setCurrentEntity(entity);
+        break;
+      case 'Interaction':
+        setCurrentEntity(entity);
+        break;
+      case 'Recipe':
+        setCurrentEntity(entity);
+        break;
+      case 'Recipe Metadata':
+        setCurrentEntity(entity);
+        break;
+      default:
+        console.log('Unhandled entity: ', entity);
+    }
   };
 
-  const handleNavClickPropertyTypeTable = (entity: string) => {
-    setCurrentEntity(entity);
+
+
+const handleIngredientPropertiesClick = (ingredient: string) => {
+    setSelectedTable('IngredientProperties');
+    fetchIngredientProperties(ingredient);
+    
+};
+
+const handleIngredientInteractionsClick = (ingredient: string) => {
+    setSelectedTable('Interactions');
+    fetchInteractions(ingredient);
+    
+};
+
+const handleRecipeMetadataClick = (recipe: string) => {
+  setSelectedTable('RecipeMetadata');
+  fetchRecipeMetadata(recipe);
+};
+
+
+  const fetchIngredientProperties = async (ingredient: string) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/ingredient/${ingredient}/properties/`
+      );
+      if (!response.ok) {
+        console.error('Failed to fetch ingredient properties');
+        setIngredientProperties([]);
+      } else {
+        const data = await response.json();
+        console.log('ingredient properties:', data);
+        setIngredientProperties(data);
+      }
+    } catch (error) {
+      console.error('Error fetching ingredient properties: ', error);
+      setIngredientProperties([]);
+    }
   };
-  
-  const handleNavClickIngredientPropertiesTable = (entity: string) => {
-    setCurrentEntity(entity);
+const fetchInteractions = async (ingredient: string) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/ingredient/${ingredient}/interactions/`
+      );
+      if (!response.ok) {
+        console.error('Failed to fetch interactions');
+        setInteractions([]);
+      } else {
+        const data = await response.json();
+        console.log('interactions:', data);
+        setInteractions(data);
+      }
+    } catch (error) {
+      console.error('Error fetching interactions: ', error);
+      setInteractions([]);
+    }
+  };
+  const fetchRecipeMetadata = async (recipe: string) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/recipe/${recipe}/metadata/`
+      );
+      if (!response.ok) {
+        console.error('Failed to fetch recipe metadata');
+        setRecipeMetadata([]);
+      } else {
+        const data = await response.json();
+        console.log('recipe metadata:', data);
+        setRecipeMetadata(data);
+      }
+    } catch (error) {
+      console.error('Error fetching recipe metadata: ', error);
+      setRecipeMetadata([]);
+    }
   };
 
   useEffect(() => {
@@ -38,10 +125,19 @@ function DataEntryPage() {
         case 'Ingredient Property':
           url = 'http://127.0.0.1:8000/api/ingredient-properties/';
           break;
+        case 'Interaction':
+          url = 'http://127.0.0.1:8000/api/interactions/';
+          break;
+        case 'Recipe':
+          url = 'http://127.0.0.1:8000/api/recipes/';
+          break;
+        case 'Recipe Metadata':
+          url = 'http://127.0.0.1:8000/api/recipe-metadata/';
+          break;
         default:
           url = '';
       }
-    
+
       if (url) {
         try {
           const response = await fetch(url);
@@ -63,21 +159,19 @@ function DataEntryPage() {
     fetchData();
   }, [currentEntity]);
 
-
   return (
-    <Flex>
-      <Box flex={1}>
-        <SidebarContent 
-        handleNavClickIngredientTable={handleNavClickIngredientTable}
-        handleNavClickPropertyTypeTable={handleNavClickPropertyTypeTable}
-        handleNavClickIngredientPropertiesTable={handleNavClickIngredientPropertiesTable} children={undefined} />
-      </Box>
-      <Box p={5} w="100%" h="100vh" overflow="auto" flex={4}>
-      {currentEntity === 'Ingredient' && <IngredientTable data={currentData} />}
-      {currentEntity === 'Property Type' && <PropertyTypeTable data={currentData} />}
-      {currentEntity === 'Ingredient Properties' && <IngredientPropertiesTable data={currentData} />}
-      </Box>
-    </Flex>
+    <DBDashboard
+      currentEntity={currentEntity}
+      currentData={currentData}
+      selectedTable={selectedTable}
+      handleIngredientPropertiesClick={handleIngredientPropertiesClick}
+      handleIngredientInteractionsClick={handleIngredientInteractionsClick}
+      ingredientProperties={ingredientProperties}
+      interactions={interactions}
+      handleRecipeMetadataClick={handleRecipeMetadataClick}
+      recipeMetadata={recipeMetadata}
+      handleNavClick={handleNavClick}
+    />
   );
 }
 

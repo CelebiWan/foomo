@@ -12,6 +12,7 @@ from backend.views import (
     FunctionalityViewSet,
     RecipeViewSet,
     RecipeMetadataViewSet,
+    RecipeMetadataDetailViewSet,
     FormulaViewSet,
     FormulaPropertyViewSet,
     FormulaMetadataViewSet,
@@ -55,4 +56,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/ingredient/<str:ingredient_name>/properties/', IngredientPropertyDetailViewSet.as_view({'get': 'list'}), name='ingredient-properties-detail'),
     path('api/ingredient/<str:ingredient_name>/interactions/', InteractionDetailViewSet.as_view({'get': 'list'}), name='ingredient-interactions-detail'),
+    path('api/recipe/<str:recipe_name>/metadata/', RecipeMetadataDetailViewSet.as_view({'get': 'list'}), name='recipe-metadata')
+
 ]

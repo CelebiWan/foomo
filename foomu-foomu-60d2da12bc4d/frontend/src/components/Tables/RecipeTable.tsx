@@ -9,10 +9,10 @@ interface Recipe {
 
 interface TableProps {
   data: Recipe[];
-  handleViewMetadataClick: (recipeId: number) => void; 
+  handleRecipeMetadataClick: (recipe: string) => void; 
 }
 
-const RecipeTable: FC<TableProps> = ({ data, handleViewMetadataClick }) => {
+const RecipeTable: FC<TableProps> = ({ data, handleRecipeMetadataClick }) => {
   if (!data) {
     return <p>Loading data...</p>;
   }
@@ -24,6 +24,7 @@ const RecipeTable: FC<TableProps> = ({ data, handleViewMetadataClick }) => {
           <Th>ID</Th>
           <Th>Alias</Th>
           <Th>Name</Th>
+          <Th>Action</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -33,7 +34,7 @@ const RecipeTable: FC<TableProps> = ({ data, handleViewMetadataClick }) => {
             <Td>{recipe.alias}</Td>
             <Td>{recipe.name}</Td>
             <Td>
-              <Button size="sm" onClick={() => handleViewMetadataClick(recipe.id)}>
+              <Button size="sm" onClick={() => handleRecipeMetadataClick(recipe.name)}>
                 View Metadata
               </Button>
             </Td>

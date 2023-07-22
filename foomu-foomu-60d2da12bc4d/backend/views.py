@@ -283,7 +283,12 @@ class RecipeMetadataViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
+class RecipeMetadataDetailViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = RecipeMetadataSerializer
 
+    def get_queryset(self):
+        recipe_name = self.kwargs['recipe_name']
+        return RecipeMetadata.objects.filter(recipe__name=recipe_name)
 
 class FormulaViewSet(viewsets.ModelViewSet):
     queryset = Formula.objects.all()

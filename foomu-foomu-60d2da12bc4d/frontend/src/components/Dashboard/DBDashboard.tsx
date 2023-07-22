@@ -16,8 +16,9 @@ interface DBDashboardProps {
   handleIngredientInteractionsClick: (ingredient: string) => void;
   ingredientProperties: any[];
   interactions: any[];
-  showPropertiesTable: boolean;
-  showInteractionsTable: boolean;
+  selectedTable:'IngredientProperties' | 'Interactions' | 'RecipeMetadata'| null;
+  recipeMetadata: any[];
+  handleRecipeMetadataClick: (recipe: string) => void;
   handleNavClick: (entity: string) => void;
 }
 
@@ -28,17 +29,15 @@ const DBDashboard: React.FC<DBDashboardProps> = ({
   handleIngredientInteractionsClick,
   ingredientProperties,
   interactions,
-  showPropertiesTable,
-  showInteractionsTable,
+  selectedTable,
+  handleRecipeMetadataClick,
+  recipeMetadata,
   handleNavClick
 }) => {
-    
   return (
     <Grid templateColumns="0.5fr 3fr" gap={4}>
       <Box>
-        <SidebarContent
-          handleNavClick={handleNavClick}
-        />
+        <SidebarContent handleNavClick={handleNavClick} />
       </Box>
       <Flex direction="column" height="100vh" overflow="auto">
         <Box p={5}>
@@ -49,21 +48,31 @@ const DBDashboard: React.FC<DBDashboardProps> = ({
               handleIngredientInteractionsClick={handleIngredientInteractionsClick}
             />
           )}
+          {currentEntity === 'Recipe' && (
+            <RecipeTable
+              data={currentData}
+              handleRecipeMetadataClick={handleRecipeMetadataClick}
+            />
+          )}
         </Box>
-        {showPropertiesTable && (
+        {selectedTable === 'IngredientProperties' && (
           <Box p={5}>
             <IngredientPropertiesTable data={ingredientProperties}/>
           </Box>
         )}
-        {showInteractionsTable && (
+        {selectedTable === 'Interactions' && (
           <Box p={5}>
             <InteractionTable data={interactions} />
+          </Box>
+        )}
+        {selectedTable === 'RecipeMetadata' && (
+          <Box p={5}>
+            <RecipeMetadataTable data={recipeMetadata} />
           </Box>
         )}
         {currentEntity === 'Property Type' && <PropertyTypeTable data={currentData} />}
         {currentEntity === 'Ingredient Property' && <IngredientPropertiesTable data={currentData} />}
         {currentEntity === 'Interaction' && <InteractionTable data={currentData} />}
-        {currentEntity === 'Recipe' && <RecipeTable data={currentData} />}
         {currentEntity === 'Recipe Metadata' && <RecipeMetadataTable data={currentData} />}
       </Flex>
     </Grid>
