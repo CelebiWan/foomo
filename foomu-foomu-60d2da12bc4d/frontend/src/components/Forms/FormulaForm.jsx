@@ -27,7 +27,7 @@ function FormulaForm() {
     const values = Object.fromEntries(data.entries());
 
     try {
-      const response = await fetch('/api/formula/', {
+      const response = await fetch('/api/formula', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ function FormulaForm() {
 
         <FormControl id="formula_type">
           <FormLabel>Formula Type</FormLabel>
-          <Select name="formul_type" required>
+          <Select name="formula_type" required>
             {formulaTypes.map((formulaType) => (
               <option key={formulaType.id} value={formulaType.id}>{formulaType.name}</option>
             ))}

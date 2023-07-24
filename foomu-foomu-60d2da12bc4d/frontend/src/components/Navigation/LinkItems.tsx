@@ -17,7 +17,7 @@ export const LinkItems: Array<LinkItemProps> = [
   { name: 'Recipe Metadata', icon: GiChemicalDrop },
   { name: 'Formula', icon: GiChemicalDrop },
   { name: 'Formula Type', icon: GiChemicalDrop },
-  { name: 'Formula Properties', icon: GiChemicalDrop },
+  { name: 'Formula Property', icon: GiChemicalDrop },
   { name: 'Formula Metadata', icon: GiChemicalDrop },
   { name: 'Equipment', icon: GiChemicalDrop },
   { name: 'Process', icon: GiChemicalDrop },

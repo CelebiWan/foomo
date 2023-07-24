@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
       const formulaTypeData = await formulaTypeResponse.json();
   
-      if (!ingredientResponse.ok || !formulaTypeResponse.ok) {
+      if (!formulaTypeResponse.ok) {
         // Handle error response
         return res.status( formulaTypeResponse.status).json({
           formulaTypes: formulaTypeData,

@@ -25,7 +25,7 @@ function QualitativeResultForm() {
   const [qualitativeTypes, setqualitativeTypes] = useState([]);
 
   useEffect(() => {
-    fetch('/api/Qualitativeresults')
+    fetch('/api/qualitativeresults')
       .then(res => res.json())
       .then(data => {
         console.log(data); 

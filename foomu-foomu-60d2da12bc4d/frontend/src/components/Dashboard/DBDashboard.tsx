@@ -6,8 +6,19 @@ import IngredientTable from '../Tables/IngredientTable';
 import PropertyTypeTable from '../Tables/PropertyTypesTable';
 import IngredientPropertiesTable from '../Tables/IngredientPropertiesTable';
 import InteractionTable from '../Tables/InteractionTable';
+import InteractionTypeTable from '../Tables/InteractionTypesTable';
 import RecipeTable from '../Tables/RecipeTable';
 import RecipeMetadataTable from '../Tables/RecipeMetadataTable';
+import FormulaTable from '../Tables/FormulaTable';
+import FormulaTypeTable from '../Tables/FormulaTypesTable';
+import FormulaPropertiesTable from '../Tables/FormulaPropertiesTable';
+import EquipmentTable from '../Tables/EquipmentsTable';
+import ProcessTable from '../Tables/ProcessesTable';
+import ValidationTable from '../Tables/ValidationsTable';
+import QualitativeTypeTable from '../Tables/QualitativeTypesTable';
+import ExperimentTable from '../Tables/ExperimentsTable';
+import QualitativeResultTable from '../Tables/QualitativeResultsTable';
+import QuantitativeResultTable from '../Tables/QuantitativeResultsTable';
 
 interface DBDashboardProps {
   currentEntity: string | null;
@@ -73,7 +84,18 @@ const DBDashboard: React.FC<DBDashboardProps> = ({
         {currentEntity === 'Property Type' && <PropertyTypeTable data={currentData} />}
         {currentEntity === 'Ingredient Property' && <IngredientPropertiesTable data={currentData} />}
         {currentEntity === 'Interaction' && <InteractionTable data={currentData} />}
+        {currentEntity === 'Interaction Type' && <InteractionTypeTable data={currentData} />}
         {currentEntity === 'Recipe Metadata' && <RecipeMetadataTable data={currentData} />}
+        {currentEntity === 'Formula' && <FormulaTable data={currentData} />}
+        {currentEntity === 'Formula Type' && <FormulaTypeTable data={currentData} />}
+        {currentEntity === 'Formula Property' && <FormulaPropertiesTable data={currentData} />}
+        {currentEntity === 'Equipment' && <EquipmentTable data={currentData} />}
+        {currentEntity === 'Process' && <ProcessTable data={currentData} />}
+        {currentEntity === 'Validation' && <ValidationTable data={currentData} />}
+        {currentEntity === 'Experiment' && <ExperimentTable data={currentData} />}
+        {currentEntity === 'Qualitative Type' && <QualitativeTypeTable data={currentData} />}
+        {currentEntity === 'Qualitative Result' && <QualitativeResultTable data={currentData} />}
+        {currentEntity === 'Quantitative Result' && <QuantitativeResultTable data={currentData} />}
       </Flex>
     </Grid>
   );

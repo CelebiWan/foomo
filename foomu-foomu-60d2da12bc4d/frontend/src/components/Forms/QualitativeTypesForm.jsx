@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 function QualitativeTypeForm() {

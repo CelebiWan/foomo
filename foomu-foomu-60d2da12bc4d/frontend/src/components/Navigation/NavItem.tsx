@@ -97,7 +97,7 @@ import {
         return <FormulaForm />
       case 'Formula Type':
         return <FormulaTypeForm />
-      case 'Formula Properties':
+      case 'Formula Property':
         return < FormulaPropertiesForm />
       case 'Formula Metadata':
         return < FormulaMetadataForm />

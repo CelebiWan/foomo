@@ -25,10 +25,43 @@ function DataEntryPage() {
       case 'Interaction':
         setCurrentEntity(entity);
         break;
+      case 'Interaction Type':
+        setCurrentEntity(entity);
+        break;
       case 'Recipe':
         setCurrentEntity(entity);
         break;
       case 'Recipe Metadata':
+        setCurrentEntity(entity);
+        break;
+      case 'Formula':
+        setCurrentEntity(entity);
+        break;
+      case 'Formula Type':
+        setCurrentEntity(entity);
+        break;
+      case 'Formula Property':
+        setCurrentEntity(entity);
+        break;
+      case 'Equipment':
+        setCurrentEntity(entity);
+        break;
+      case 'Process':
+        setCurrentEntity(entity);
+        break;
+      case 'Validation':
+        setCurrentEntity(entity);
+        break;
+      case 'Experiment':
+        setCurrentEntity(entity);
+        break;
+      case 'Qualitative Type':
+        setCurrentEntity(entity);
+        break;
+      case 'Qualitative Result':
+        setCurrentEntity(entity);
+        break;
+      case 'Quantitative Result':
         setCurrentEntity(entity);
         break;
       default:
@@ -128,11 +161,44 @@ const fetchInteractions = async (ingredient: string) => {
         case 'Interaction':
           url = 'http://127.0.0.1:8000/api/interactions/';
           break;
+        case 'Interaction Type':
+          url = 'http://127.0.0.1:8000/api/interaction-types/';
+          break;
         case 'Recipe':
           url = 'http://127.0.0.1:8000/api/recipes/';
           break;
         case 'Recipe Metadata':
           url = 'http://127.0.0.1:8000/api/recipe-metadata/';
+          break;
+        case 'Formula':
+          url = 'http://127.0.0.1:8000/api/formulas/';
+          break;
+        case 'Formula Type':
+          url = 'http://127.0.0.1:8000/api/formula-types/';
+          break;
+        case 'Formula Property':
+          url = 'http://127.0.0.1:8000/api/formula-properties/';
+          break;
+        case 'Equipment':
+          url = 'http://127.0.0.1:8000/api/equipments/';
+          break;
+        case 'Process':
+          url = 'http://127.0.0.1:8000/api/processes/';
+          break;
+        case 'Validation':
+          url = 'http://127.0.0.1:8000/api/validations/';
+          break;
+        case 'Experiment':
+          url = 'http://127.0.0.1:8000/api/experiments/';
+          break;
+        case 'Qualitative Type':
+          url = 'http://127.0.0.1:8000/api/qualitative-types/';
+          break;
+        case 'Qualitative result':
+          url = 'http://127.0.0.1:8000/api/qualitative-results/';
+          break;
+        case 'Quantitative result':
+          url = 'http://127.0.0.1:8000/api/quantitative-results/';
           break;
         default:
           url = '';
